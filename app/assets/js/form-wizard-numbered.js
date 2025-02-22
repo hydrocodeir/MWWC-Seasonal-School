@@ -25,9 +25,9 @@ $(function () {
     });
   }
 });
+
+
 (function () {
-  // Numbered Wizard
-  // --------------------------------------------------------------------
   const wizardNumbered = document.querySelector('.wizard-numbered'),
     wizardNumberedBtnNextList = [].slice.call(wizardNumbered.querySelectorAll('.btn-next')),
     wizardNumberedBtnPrevList = [].slice.call(wizardNumbered.querySelectorAll('.btn-prev')),
@@ -51,14 +51,5 @@ $(function () {
         });
       });
     }
-    if (wizardNumberedBtnSubmit) {
-      wizardNumberedBtnSubmit.addEventListener('click', event => {
-        alert('Submitted..!!');
-      });
-    }
   }
-
-
-
-
 })();

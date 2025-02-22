@@ -34,9 +34,23 @@
         </div>
         <div class="col-md-6">
             <div class="bs-stepper wizard-numbered my-2">
+                <!-- Error Form -->
+                {% if form.is_submitted() and form.errors|count > 0 %}
+                <div class="alert-danger p-3" role="alert">
+                    {{ form.errors|count }} خطا رخ داده است:
+                    <ul>
+                        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                            {% for error in field_errors %}
+                                <li>{{ form[field_name].label }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}    
+                <!-- / Error Form -->
                 <h4 class="text-primary fw-medium text-center pt-3">فرم ثبت نام</h4>
                 <div class="bs-stepper-header">
-                    <div class="step" data-target="#account-details">
+                    <div class="step" data-target="#personal">
                         <button type="button" class="step-trigger">
                             <span class="bs-stepper-circle">1</span>
                             <span class="bs-stepper-label">
@@ -46,7 +60,7 @@
                         </button>
                     </div>
                     <div class="line"></div>
-                    <div class="step" data-target="#personal-info">
+                    <div class="step" data-target="#university">
                         <button type="button" class="step-trigger">
                             <span class="bs-stepper-circle">2</span>
                             <span class="bs-stepper-label">
@@ -56,7 +70,7 @@
                         </button>
                     </div>
                     <div class="line"></div>
-                    <div class="step" data-target="#social-links">
+                    <div class="step" data-target="#address">
                         <button type="button" class="step-trigger">
                             <span class="bs-stepper-circle">3</span>
                             <span class="bs-stepper-label">
@@ -70,7 +84,7 @@
                     <form action="" method="POST" novalidate>
                         {{ form.csrf_token }}
                         <!-- Account Details -->
-                        <div id="account-details" class="content">
+                        <div id="personal" class="content">
                             <div class="content-header mb-3">
                                 <small>اطلاعات خود را وارد کنید</small>
                             </div>
@@ -91,20 +105,21 @@
                                     {{ form.birthday.label(class="form-label") }}
                                     {{ form.birthday(class="form-control") }}
                                 </div>
+
                                 <div class="col-12 d-flex justify-content-between">
-                                    <button class="btn btn-label-secondary btn-prev" disabled>
+                                    <a class="btn btn-label-secondary btn-prev disabled" style="color: white;">
                                         <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
                                         <span class="d-sm-inline-block d-none">قبلی</span>
-                                    </button>
-                                    <button class="btn btn-primary btn-next">
-                                        <span class="d-sm-inline-block d-none">بعد</span>
+                                    </a>
+                                    <a class="btn btn-primary btn-next" style="color: white;">
+                                        <span class="d-sm-inline-block d-none" >بعدی</span>
                                         <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <!-- Personal Info -->
-                        <div id="personal-info" class="content">
+                        <div id="university" class="content">
                             <div class="content-header mb-3">
                                 <small>اطلاعات خود را وارد کنید</small>
                             </div>
@@ -127,19 +142,19 @@
                                 </div>
                                 
                                 <div class="col-12 d-flex justify-content-between">
-                                    <button class="btn btn-primary btn-prev">
+                                    <a class="btn btn-primary btn-prev" style="color: white;">
                                         <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
                                         <span class="d-sm-inline-block d-none">قبلی</span>
-                                    </button>
-                                    <button class="btn btn-primary btn-next">
-                                        <span class="d-sm-inline-block d-none">بعدی</span>
+                                    </a>
+                                    <a class="btn btn-primary btn-next" style="color: white;">
+                                        <span class="d-sm-inline-block d-none" >بعدی</span>
                                         <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <!-- Social Links -->
-                        <div id="social-links" class="content">
+                        <div id="address" class="content">
                             <div class="content-header mb-3">
                                 <small>اطلاعات خود را وارد کنید</small>
                             </div>
@@ -156,12 +171,15 @@
                                     {{ form.address.label(class="form-label") }}
                                     {{ form.address(class="form-control") }}
                                 </div>
+                                <input type="hidden" name="form_id" value="register">
                                 <div class="col-12 d-flex justify-content-between">
-                                    <button class="btn btn-primary btn-prev">
+                                    <a class="btn btn-primary btn-prev" style="color: white;">
                                         <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
                                         <span class="d-sm-inline-block d-none">قبلی</span>
+                                    </a>
+                                    <button type="submit" class="btn btn-success btn-submit">
+                                        ثبت نام
                                     </button>
-                                    <button class="btn btn-success btn-submit">ثبت نهایی</button>
                                 </div>
                             </div>
                         </div>

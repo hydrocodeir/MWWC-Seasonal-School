@@ -19,6 +19,7 @@ if (document.getElementById('layout-menu')) {
     window.Helpers.initCustomOptionCheck();
   }, 1000);
 
+
   // Initialize menu
   //-----------------
 

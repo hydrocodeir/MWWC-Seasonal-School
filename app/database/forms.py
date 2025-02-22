@@ -1,12 +1,31 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, FloatField, SelectField, DecimalField, TextAreaField, SelectMultipleField
-from flask_wtf.file import FileAllowed, FileField
-from wtforms.validators import DataRequired, Length, ValidationError, InputRequired, NumberRange, Email
+from wtforms import (
+    StringField,
+    IntegerField,
+    FloatField,
+    SelectField,
+    DecimalField,
+    TextAreaField,
+    SelectMultipleField
+)
+from flask_wtf.file import (
+    FileAllowed, 
+    FileField
+)
+from wtforms.validators import (
+    DataRequired,
+    Length,
+    ValidationError,
+    InputRequired,
+    NumberRange,
+    Email
+)
 
 
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Validate Functions
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+
 def validate_phone_start(form, field):
     if not field.data.startswith('09'):
         raise ValidationError('شماره تلفن باید با 09 شروع شود!')
@@ -153,7 +172,7 @@ class RegisterForm(FlaskForm):
         ],
         default='',
         render_kw={
-            "placeholder": "رشته تحصیلی را وارد کنید"
+            "data-placeholder": "رشته تحصیلی را وارد کنید"
         }
     )
 
@@ -239,8 +258,9 @@ class RegisterForm(FlaskForm):
             ('دکتری', 'دکتری'),
         ]
         self.academic_discipline.choices = [
+            ('', 'انتخاب رشته تحصیلی ...'),
             ('علوم و مهندسی کامپیوتر و هوش مصنوعی',
-             'علوم و مهندسی کامپیوتر و هوش مصنوعی'),
+            'علوم و مهندسی کامپیوتر و هوش مصنوعی'),
             ('مهندسی برق', 'مهندسی برق'),
             ('مهندسی عمران', 'مهندسی عمران'),
             ('علوم و مهندسی آب', 'علوم و مهندسی آب'),

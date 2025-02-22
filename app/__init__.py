@@ -39,6 +39,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Import Models Here
 from app.users.models import User
+from app.database.models import Register
 
 migrate.init_app(app=app, db=db)
 login_manager.init_app(app=app)

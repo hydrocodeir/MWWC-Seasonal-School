@@ -1,4 +1,12 @@
-from flask import Blueprint, render_template, jsonify, redirect, url_for, flash, request
+from flask import (
+    Blueprint, 
+    render_template, 
+    jsonify, 
+    redirect, 
+    url_for, 
+    flash, 
+    request
+)
 from flask_login import current_user, login_required
 from app.extensions import db, cache
 from sqlalchemy import distinct
@@ -35,14 +43,16 @@ def virastarStr(x):
 # -----------------------------------------------------------------------------
 
 @blueprint.route('/', methods=['GET', 'POST'])
-# @login_required
 def home():
     
     form = RegisterForm()
         
     if request.method == 'POST':
-        if form.validate_on_submit():
-            
+        
+        form_id = request.form.get('form_id')
+        
+        if form_id == 'register' and form.validate_on_submit():
+                              
             first_name = virastarStr(form.first_name.data)
             last_name = virastarStr(form.last_name.data)
             national_id = virastarStr(form.national_id.data)
