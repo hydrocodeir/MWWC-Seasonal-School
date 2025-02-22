@@ -83,7 +83,7 @@ def home():
             db.session.commit()
             
             flash('اطلاعات با موفقیت ثبت شد!', 'success')
-            return redirect(location=url_for(endpoint='database.home'))
+            return redirect(location=url_for(endpoint='dashboard.home'))
         
     return render_template(
         template_name_or_list='dashboard/home.html',
