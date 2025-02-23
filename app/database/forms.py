@@ -221,20 +221,72 @@ class RegisterForm(FlaskForm):
             "placeholder": "ایمیل را وارد کنید"
         }
     )
-
-    address = StringField(
-        label='آدرس محل سکونت',
+    
+    address = SelectField(
+        label='نیاز به اسکان دارید؟',
         validators=[
             DataRequired(
-                message="وارد کردن آدرس محل سکونت الزامیست!"
+                message="وارد کردن نیاز به اسکان الزامیست!"
             ),
             Length(
                 max=200,
                 message='حداکثر 200 کاراکتر!'
             )
         ],
+        default='',
         render_kw={
-            "placeholder": "آدرس محل سکونت را وارد کنید"
+            "data-placeholder": "نیاز به اسکان خود را انتخاب کنید"
+        }
+    )
+    
+    english = SelectField(
+        label='انتخاب سطح زبان انگلیسی',
+        validators=[
+            DataRequired(
+                message="وارد کردن سطح زبان انگلیسی الزامیست!"
+            ),
+            Length(
+                max=30,
+                message='حداکثر 30 کاراکتر!'
+            )
+        ],
+        default='',
+        render_kw={
+            "data-placeholder": "سطح زبان انگلیسی"
+        }
+    )
+    
+    programing = SelectField(
+        label='انتخاب سطح آشنایی با زبان‌های برنامه نویسی',
+        validators=[
+            DataRequired(
+                message="انتخاب سطح آشنایی با زبان‌های برنامه نویسی الزامیست!!"
+            ),
+            Length(
+                max=30,
+                message='حداکثر 30 کاراکتر!'
+            )
+        ],
+        default='',
+        render_kw={
+            "data-placeholder": "آشنایی با زبان‌های برنامه‌نویسی"
+        }
+    )
+    
+    publication = SelectField(
+        label='آیا مقاله علمی در رابطه با علوم داده یا هوش مصنوعی دارید؟',
+        validators=[
+            DataRequired(
+                message="وارد کردن مدارک علمی الزامیست!"
+            ),
+            Length(
+                max=30,
+                message='حداکثر 30 کاراکتر!'
+            )
+        ],        
+        default='',
+        render_kw={
+            "data-placeholder": "مدارک علمی مرتبط"
         }
     )
 
@@ -265,4 +317,26 @@ class RegisterForm(FlaskForm):
             ('مهندسی عمران', 'مهندسی عمران'),
             ('علوم و مهندسی آب', 'علوم و مهندسی آب'),
             ('ریاضیات کاربردی', 'ریاضیات کاربردی'),
+        ]
+        self.address.choices = [
+            ('', 'انتخاب نیاز به اسکان ...'),
+            ('بله', 'بله'),
+            ('خیر', 'خیر'),
+        ]
+        self.publication.choices = [
+            ('', 'انتخاب مدارک علمی مرتیط ...'),
+            ('بله', 'بله'),
+            ('خیر', 'خیر'),
+        ]
+        self.programing.choices = [
+            ('', 'انتخاب سطح آشنایی با زبان‌های برنامه نویسی ...'),
+            ('مبتدی', 'مبتدی'),
+            ('متوسط', 'متوسط'),
+            ('پیشرفته', 'پیشرفته'),            
+        ]
+        self.english.choices = [
+            ('', 'انتخاب سطح زبان انگلیسی ...'),
+            ('مبتدی', 'مبتدی'),
+            ('متوسط', 'متوسط'),
+            ('پیشرفته', 'پیشرفته'),
         ]

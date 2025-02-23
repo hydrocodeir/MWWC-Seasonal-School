@@ -70,7 +70,7 @@ class Register(BaseModel, UserMixin):
     
     phone_number = db.Column(
         db.String(11),
-        unique=False,
+        unique=True,
         nullable=False,
         info={'verbose_name': 'شماره تماس'}
     )
@@ -87,6 +87,27 @@ class Register(BaseModel, UserMixin):
         unique=False, 
         nullable=False,
         info={'verbose_name': 'آدرس محل سکونت'}
+    )
+    
+    english = db.Column(
+        db.String(30),
+        unique=False, 
+        nullable=False,
+        info={'verbose_name': 'سطح زبان انگلیسی'}
+    )
+    
+    programing = db.Column(
+        db.String(30),
+        unique=False, 
+        nullable=False,
+        info={'verbose_name': 'آشنایی با برنامه نویسی'}
+    )
+    
+    publication = db.Column(
+        db.String(30),
+        unique=False, 
+        nullable=False,
+        info={'verbose_name': 'مدارک علمی'}
     )
     
     def __repr__(self):

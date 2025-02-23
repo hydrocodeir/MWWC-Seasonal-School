@@ -52,6 +52,24 @@ def home():
         form_id = request.form.get('form_id')
         
         if form_id == 'register' and form.validate_on_submit():
+            
+            # check national_id duplicate
+            national_id = virastarStr(form.national_id.data)
+            if Register.query.filter_by(national_id=national_id).first():
+                flash('کد ملی تکراری است!', 'danger')
+                return redirect(location=url_for(endpoint='dashboard.home'))
+            
+            # check email duplicate
+            email = virastarStr(form.email.data)
+            if Register.query.filter_by(email=email).first():
+                flash('ایمیل تکراری است!', 'danger')
+                return redirect(location=url_for(endpoint='dashboard.home'))
+            
+            # check phone_number duplicate
+            phone_number = virastarStr(form.phone_number.data)
+            if Register.query.filter_by(phone_number=phone_number).first():
+                flash('شماره تلفن تکراری است!', 'danger')
+                return redirect(location=url_for(endpoint='dashboard.home'))
                               
             first_name = virastarStr(form.first_name.data)
             last_name = virastarStr(form.last_name.data)
@@ -64,6 +82,9 @@ def home():
             phone_number = virastarStr(form.phone_number.data)
             email = virastarStr(form.email.data)
             address = virastarStr(form.address.data)
+            english = virastarStr(form.english.data)
+            programing = virastarStr(form.programing.data)
+            publication = virastarStr(form.publication.data)
             
             register = Register(
                 first_name=first_name,
@@ -76,7 +97,10 @@ def home():
                 score=score,
                 phone_number=phone_number,
                 email=email,
-                address=address
+                address=address,
+                english=english,
+                programing=programing,
+                publication=publication,
             )
             
             db.session.add(register)
