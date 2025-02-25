@@ -55,14 +55,24 @@
                             <span class="bs-stepper-circle">1</span>
                             <span class="bs-stepper-label">
                                 <span class="bs-stepper-title">اطلاعات فردی</span>
-                                <span class="bs-stepper-subtitle">ثبت مشخصات قرد</span>
+                                <span class="bs-stepper-subtitle">ثبت مشخصات فرد</span>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="line"></div>
+                    <div class="step" data-target="#general">
+                        <button type="button" class="step-trigger">
+                            <span class="bs-stepper-circle">2</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">اطلاعات عمومی</span>
+                                <span class="bs-stepper-subtitle">ثبت مشخصات عمومی</span>
                             </span>
                         </button>
                     </div>
                     <div class="line"></div>
                     <div class="step" data-target="#university">
                         <button type="button" class="step-trigger">
-                            <span class="bs-stepper-circle">2</span>
+                            <span class="bs-stepper-circle">3</span>
                             <span class="bs-stepper-label">
                                 <span class="bs-stepper-title">اطلاعات دانشگاهی</span>
                                 <span class="bs-stepper-subtitle">ثبت مشخصات دانشگاه</span>
@@ -72,7 +82,7 @@
                     <div class="line"></div>
                 </div>
                 <div class="bs-stepper-content">
-                    <form action="" method="POST" novalidate>
+                    <form action="" method="POST" novalidate enctype="multipart/form-data">
                         {{ form.csrf_token }}
                         <!-- Account Details -->
                         <div id="personal" class="content">
@@ -104,25 +114,50 @@
                                     {{ form.email.label(class="form-label") }}
                                     {{ form.email(class="form-control") }}
                                 </div>
+
+                                <div class="col-12 d-flex justify-content-between">
+                                    <a class="btn btn-label-secondary btn-prev disabled" style="color: white;">
+                                        <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                                        <span class="d-sm-inline-block d-none">قبلی</span>
+                                    </a>
+                                    <a class="btn btn-primary btn-next" style="color: white;">
+                                        <span class="d-sm-inline-block d-none" >بعدی</span>
+                                        <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="general" class="content">
+                            <div class="content-header mb-3">
+                                <small>اطلاعات خود را وارد کنید</small>
+                            </div>
+                            <div class="row g-3">
                                 <div class="col-md-6 col-sm-12">
-                                    {{ form.address.label(class="form-label") }}
-                                    {{ form.address(class="select2") }}
+                                    {{ form.accommodation.label(class="form-label") }}
+                                    {{ form.accommodation(class="select2") }}
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     {{ form.english.label(class="form-label") }}
                                     {{ form.english(class="select2") }}
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    {{ form.publication.label(class="form-label") }}
-                                    {{ form.publication(class="select2") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
                                     {{ form.programing.label(class="form-label") }}
                                     {{ form.programing(class="select2") }}
                                 </div>
-
+                                <div class="col-md-6 col-sm-12">
+                                    {{ form.programing_language.label(class="form-label") }}
+                                    {{ form.programing_language(class="select2", multiple="multiple") }}
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    {{ form.resume.label(class="form-label") }}
+                                    {{ form.resume(class="form-control") }}
+                                    <a class="ps-2 pt-2" href="{{ url_for('dashboard.download_resume_template') }}" download>
+                                        دانلود نمونه رزومه
+                                    </a>
+                                </div>
+        
                                 <div class="col-12 d-flex justify-content-between">
-                                    <a class="btn btn-label-secondary btn-prev disabled" style="color: white;">
+                                    <a class="btn btn-primary btn-prev" style="color: white;">
                                         <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
                                         <span class="d-sm-inline-block d-none">قبلی</span>
                                     </a>
@@ -154,6 +189,10 @@
                                 <div class="col-md-6 col-sm-12">
                                     {{ form.score.label(class="form-label") }}
                                     {{ form.score(class="form-control") }}
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    {{ form.student_identification_number.label(class="form-label") }}
+                                    {{ form.student_identification_number(class="form-control") }}
                                 </div>
                                 
                                 <input type="hidden" name="form_id" value="register">

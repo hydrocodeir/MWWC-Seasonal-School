@@ -1,3 +1,4 @@
+import os
 from flask import (
     Blueprint, 
     render_template, 
@@ -5,7 +6,9 @@ from flask import (
     redirect, 
     url_for, 
     flash, 
-    request
+    request,
+    send_from_directory,
+    current_app
 )
 from flask_login import current_user, login_required
 from app.extensions import db, cache
@@ -35,6 +38,14 @@ def virastarStr(x):
     x = x.lstrip()
     x = x.replace(' +', ' ')
     return str(x)
+
+
+def save_resume(form_resume, nid):
+    _, f_ext = os.path.splitext(form_resume.filename)
+    resume_fn = nid + f_ext
+    resume_path = os.path.join('app/assets/uploads', resume_fn)
+    form_resume.save(resume_path)
+    return resume_fn
 
 
 
@@ -75,32 +86,47 @@ def home():
             last_name = virastarStr(form.last_name.data)
             national_id = virastarStr(form.national_id.data)
             birthday = virastarStr(form.birthday.data)
+            phone_number = virastarStr(form.phone_number.data)
+            email = virastarStr(form.email.data)
+            
             university = virastarStr(form.university.data)
             educational_stage = virastarStr(form.educational_stage.data)
             academic_discipline = virastarStr(form.academic_discipline.data)
             score = float(form.score.data)
-            phone_number = virastarStr(form.phone_number.data)
-            email = virastarStr(form.email.data)
-            address = virastarStr(form.address.data)
+            student_identification_number = virastarStr(form.student_identification_number.data)
+
+            accommodation = virastarStr(form.accommodation.data)
             english = virastarStr(form.english.data)
             programing = virastarStr(form.programing.data)
-            publication = virastarStr(form.publication.data)
+            
+            selected_programing_language = request.form.getlist('programing_language')
+            selected_programing_language = ','.join(selected_programing_language)
+            programing_language = virastarStr(selected_programing_language)
+            
+            if form.resume.data:
+                resume = save_resume(form_resume=form.resume.data, nid=national_id)
+                
+            
             
             register = Register(
                 first_name=first_name,
                 last_name=last_name,
                 national_id=national_id,
                 birthday=birthday,
+                phone_number=phone_number,
+                email=email,
+                
                 university=university,
                 educational_stage=educational_stage,
                 academic_discipline=academic_discipline,
                 score=score,
-                phone_number=phone_number,
-                email=email,
-                address=address,
+                student_identification_number=student_identification_number,
+                
+                accommodation=accommodation,
                 english=english,
                 programing=programing,
-                publication=publication,
+                programing_language=programing_language,
+                resume=resume
             )
             
             db.session.add(register)
@@ -112,6 +138,15 @@ def home():
     return render_template(
         template_name_or_list='dashboard/home.html',
         form=form
+    )
+
+
+@blueprint.route('/resume_template', methods=['GET', 'POST'])
+def download_resume_template():   
+    return send_from_directory(
+        directory=os.path.join(current_app.root_path, 'assets', 'uploads'), 
+        path="resume.docx",
+        as_attachment=True
     )
 
 

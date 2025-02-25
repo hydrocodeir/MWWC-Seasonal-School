@@ -40,6 +40,20 @@ class Register(BaseModel, UserMixin):
         info={'verbose_name': 'تاریخ تولد'}
     )
     
+    phone_number = db.Column(
+        db.String(11),
+        unique=True,
+        nullable=False,
+        info={'verbose_name': 'شماره تماس'}
+    )
+    
+    email = db.Column(
+        db.String(100),
+        unique=True, 
+        nullable=False, 
+        info={'verbose_name': 'ایمیل'}
+    )
+      
     university = db.Column(
         db.String(50),
         unique=False,
@@ -67,26 +81,19 @@ class Register(BaseModel, UserMixin):
         nullable=False, 
         info={'verbose_name': 'آخرین معدل'} 
     )
-    
-    phone_number = db.Column(
-        db.String(11),
-        unique=True,
+     
+    student_identification_number = db.Column(
+        db.String(15),
+        unique=False,
         nullable=False,
-        info={'verbose_name': 'شماره تماس'}
+        info={'verbose_name': 'شماره دانشجویی'}
     )
     
-    email = db.Column(
-        db.String(100),
-        unique=True, 
-        nullable=False, 
-        info={'verbose_name': 'ایمیل'}
-    )
-    
-    address = db.Column(
-        db.String(200),
+    accommodation = db.Column(
+        db.String(10),
         unique=False, 
         nullable=False,
-        info={'verbose_name': 'آدرس محل سکونت'}
+        info={'verbose_name': 'اسکان'}
     )
     
     english = db.Column(
@@ -100,14 +107,21 @@ class Register(BaseModel, UserMixin):
         db.String(30),
         unique=False, 
         nullable=False,
-        info={'verbose_name': 'آشنایی با برنامه نویسی'}
+        info={'verbose_name': 'سطح برنامه نویسی'}
     )
     
-    publication = db.Column(
+    programing_language = db.Column(
+        db.String(50),
+        unique=False, 
+        nullable=False,
+        info={'verbose_name': 'زیان های برنامه نویسی'}
+    )
+    
+    resume = db.Column(
         db.String(30),
         unique=False, 
         nullable=False,
-        info={'verbose_name': 'مدارک علمی'}
+        info={'verbose_name': 'رزومه'}
     )
     
     def __repr__(self):

@@ -124,6 +124,39 @@ class RegisterForm(FlaskForm):
             'data-jdp': 'true'
         }
     )
+    
+    phone_number = StringField(
+        label='تلفن همراه',
+        validators=[
+            DataRequired(
+                message="وارد کردن تلفن همراه الزامیست!"
+            ),
+            Length(
+                min=11,
+                max=11,
+                message='تلفن همراه میتواند 11 کاراکتر باشد!'
+            ),
+            validate_phone_start
+        ],
+        render_kw={
+            "placeholder": "تلفن همراه را وارد کنید"
+        }
+    )
+
+    email = StringField(
+        label='ایمیل',
+        validators=[
+            DataRequired(
+                message="وارد کردن ایمیل الزامیست!"
+            ),
+            Email(
+                message='ایمیل معتبر نیست!'
+            ),
+        ],
+        render_kw={
+            "placeholder": "ایمیل را وارد کنید"
+        }
+    )
 
     university = SelectField(
         label='دانشگاه',
@@ -188,49 +221,32 @@ class RegisterForm(FlaskForm):
             "placeholder": "معدل را وارد کنید"
         }
     )
-
-    phone_number = StringField(
-        label='تلفن همراه',
+    
+    student_identification_number = StringField(
+        label='شماره دانشجویی',
         validators=[
             DataRequired(
-                message="وارد کردن تلفن همراه الزامیست!"
+                message="وارد کردن شماره دانشجویی الزامیست!"
             ),
             Length(
-                min=11,
-                max=11,
-                message='تلفن همراه میتواند 11 کاراکتر باشد!'
-            ),
-            validate_phone_start
+                max=100,
+                message='حداکثر 15 کاراکتر!'
+            )
         ],
         render_kw={
-            "placeholder": "تلفن همراه را وارد کنید"
+            "placeholder": "شماره دانشجویی را وارد کنید",
         }
     )
 
-    email = StringField(
-        label='ایمیل',
-        validators=[
-            DataRequired(
-                message="وارد کردن ایمیل الزامیست!"
-            ),
-            Email(
-                message='ایمیل معتبر نیست!'
-            ),
-        ],
-        render_kw={
-            "placeholder": "ایمیل را وارد کنید"
-        }
-    )
-    
-    address = SelectField(
+    accommodation = SelectField(
         label='نیاز به اسکان دارید؟',
         validators=[
             DataRequired(
-                message="وارد کردن نیاز به اسکان الزامیست!"
+                message="انتخاب کردن نیاز به اسکان الزامیست!"
             ),
             Length(
-                max=200,
-                message='حداکثر 200 کاراکتر!'
+                max=10,
+                message='حداکثر 10 کاراکتر!'
             )
         ],
         default='',
@@ -273,20 +289,30 @@ class RegisterForm(FlaskForm):
         }
     )
     
-    publication = SelectField(
-        label='آیا مقاله علمی در رابطه با علوم داده یا هوش مصنوعی دارید؟',
+    programing_language = SelectMultipleField(
+        label='زبان‌های برنامه نویسی',
+        choices=[],
         validators=[
             DataRequired(
-                message="وارد کردن مدارک علمی الزامیست!"
-            ),
-            Length(
-                max=30,
-                message='حداکثر 30 کاراکتر!'
+                message="حداقل انتخاب یک مورد الزامیست!"
             )
-        ],        
-        default='',
+        ],
         render_kw={
-            "data-placeholder": "مدارک علمی مرتبط"
+            "data-placeholder": "حداقل یک مورد را انتخاب کنید"
+        }
+    )
+    
+    
+    resume = FileField(
+        label='رزومه علمی',
+        validators=[
+            DataRequired(
+                message="بارگزاری رزومه الزامیست!"
+            ),
+            FileAllowed(upload_set=['pdf', 'doc', 'docx'], message="فایل های مجاز: PDF, DOC, DOCX")
+        ],
+        render_kw={
+            "placeholder": "رزومه علمی را بارگزاری کنید"
         }
     )
 
@@ -318,13 +344,8 @@ class RegisterForm(FlaskForm):
             ('علوم و مهندسی آب', 'علوم و مهندسی آب'),
             ('ریاضیات کاربردی', 'ریاضیات کاربردی'),
         ]
-        self.address.choices = [
+        self.accommodation.choices = [
             ('', 'انتخاب نیاز به اسکان ...'),
-            ('بله', 'بله'),
-            ('خیر', 'خیر'),
-        ]
-        self.publication.choices = [
-            ('', 'انتخاب مدارک علمی مرتیط ...'),
             ('بله', 'بله'),
             ('خیر', 'خیر'),
         ]
@@ -339,4 +360,16 @@ class RegisterForm(FlaskForm):
             ('مبتدی', 'مبتدی'),
             ('متوسط', 'متوسط'),
             ('پیشرفته', 'پیشرفته'),
+        ]
+        self.programing_language.choices = [
+            ('', 'انتخاب یک مورد الزامیست ...'),
+            ('هیچکدام', 'هیچکدام'),
+            ('Python', 'Python'),
+            ('MATLAB', 'MATLAB'),
+            ('R', 'R'),
+            ('JavaScript', 'JavaScript'),
+            ('C, C++, C#', 'C, C++, C#'),
+            ('Julia', 'Julia'),
+            ('ّFortran', 'ّFortran'),
+            ('زبان های دیگر', 'زبان های دیگر'),
         ]
