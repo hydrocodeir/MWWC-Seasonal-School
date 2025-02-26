@@ -12,3 +12,4 @@ gunicorn==23.0.0
 eventlet==0.38.0
 pillow==11.1.0
 livereload==2.7.1
+pyTelegramBotAPI==4.26.0
