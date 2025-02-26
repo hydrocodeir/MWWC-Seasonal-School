@@ -62,7 +62,7 @@ def send_daily_message():
 
 def start_scheduler():
     schedule.every().day.at("21:00").do(send_daily_message)
-    schedule.every().day.at("9:00").do(send_daily_message)
+    schedule.every().day.at("09:00").do(send_daily_message)
     while True:
         schedule.run_pending()
         time.sleep(1)
