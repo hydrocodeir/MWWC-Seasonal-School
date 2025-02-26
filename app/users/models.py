@@ -1,4 +1,4 @@
-from app.db import BaseModel
+from app.data_base import BaseModel
 from app.extensions import db, login_manager
 from flask_login import UserMixin
 
