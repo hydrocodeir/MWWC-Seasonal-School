@@ -10,9 +10,18 @@ bot = telebot.TeleBot(TELEGRAM_TOKEN)
 def check_registrations(message):
 
     with app.app_context():
-        registrations = len(Register.query.all())
-        print(registrations)
-        bot.reply_to(message, f"{registrations} people have registered.")
+        registrations = Register.query.all()
+        
+        txt = f"{len(registrations)} people have registered.\n\n"
+        
+        for i in registrations:
+            txt = txt + f"{i.first_name} {i.last_name} - {i.university}\n"
+            
+        bot.reply_to(
+            message=message, 
+            text=txt,
+            parse_mode="HTML",
+        )
 
 def start_bot():
     bot.polling()
