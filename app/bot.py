@@ -12,10 +12,10 @@ def check_registrations(message):
     with app.app_context():
         registrations = Register.query.all()
         
-        txt = f"{len(registrations)} people have registered.\n\n"
+        txt = f"{len(registrations)} نفر - تعداد افراد ثبت نام شده.\n\n"
         
         for i in registrations:
-            txt = txt + f"{i.first_name} {i.last_name} - {i.university}\n"
+            txt = txt + f"{i.first_name} {i.last_name} - {i.university} - {i.educational_stage} - {i.academic_discipline}\n\n"
             
         bot.reply_to(
             message=message, 
