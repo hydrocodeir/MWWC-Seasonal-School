@@ -25,11 +25,24 @@ def init_bot(app):
 #     chat_id = message.chat.id
 #     bot.reply_to(message, f"This group's chat ID is: {chat_id}")
 
-def send_new_register(text):
+def send_new_register(text, file_path=None):
+    
+    CHAT_ID = -4638690648
+    
     bot.send_message(
-        chat_id=-4638690648,
+        chat_id=CHAT_ID,
         text=text,
         parse_mode="HTML")
+    
+    if file_path:
+        print(file_path)
+        with open(file_path, 'rb') as file:
+            bot.send_document(
+                chat_id=CHAT_ID,
+                document=file,
+                caption="رزومه متقاضی"
+                timeout=60
+            )
 
 
 def start_bot():

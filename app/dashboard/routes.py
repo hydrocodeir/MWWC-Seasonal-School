@@ -46,7 +46,7 @@ def save_resume(form_resume, nid):
     resume_fn = nid + f_ext
     resume_path = os.path.join('app/assets/uploads', resume_fn)
     form_resume.save(resume_path)
-    return resume_fn
+    return resume_path, resume_fn
 
 
 
@@ -105,7 +105,7 @@ def home():
             programing_language = virastarStr(selected_programing_language)
             
             if form.resume.data:
-                resume = save_resume(form_resume=form.resume.data, nid=national_id)
+                resume_path, resume = save_resume(form_resume=form.resume.data, nid=national_id)
                 
             
             
@@ -133,11 +133,12 @@ def home():
             db.session.add(register)
             db.session.commit()
             
-            send_new_register(
-                text=f"متقاضی جدیدی ثبت نام کرد:\nنام: {first_name}\nنام خانوادگی: {last_name}\nدانشگاه: {university}\nمقطع تحصیلی: {educational_stage}\nرشته تحصیلی: {academic_discipline}\n"
-            )
-            
             flash('اطلاعات با موفقیت ثبت شد!', 'success')
+            
+            send_new_register(
+                text=f"متقاضی جدیدی ثبت نام کرد:\nنام: {first_name}\nنام خانوادگی: {last_name}\nدانشگاه: {university}\nمقطع تحصیلی: {educational_stage}\nرشته تحصیلی: {academic_discipline}\n",
+                file_path=resume_path
+            )
             return redirect(location=url_for(endpoint='dashboard.home'))
         
     return render_template(
