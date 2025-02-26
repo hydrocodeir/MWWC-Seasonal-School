@@ -17,6 +17,7 @@ from sqlalchemy import func, case
 from sqlalchemy.orm import aliased
 from app.database.models import Register
 from app.database.forms import RegisterForm
+from app.bot import send_new_register
 
 # -----------------------------------------------------------------------------
 # Blueprint
@@ -131,6 +132,10 @@ def home():
             
             db.session.add(register)
             db.session.commit()
+            
+            send_new_register(
+                text=f"متقاضی جدیدی ثبت نام کرد:\nنام: {first_name}\nنام خانوادگی: {last_name}\nدانشگاه: {university}\nمقطع تحصیلی: {educational_stage}\nرشته تحصیلی: {academic_discipline}\n"
+            )
             
             flash('اطلاعات با موفقیت ثبت شد!', 'success')
             return redirect(location=url_for(endpoint='dashboard.home'))
