@@ -40,7 +40,7 @@ def send_new_register(text, file_path=None):
             bot.send_document(
                 chat_id=CHAT_ID,
                 document=file,
-                caption="رزومه متقاضی"
+                caption="رزومه متقاضی",
                 timeout=60
             )
 
