@@ -1,18 +1,17 @@
-{% extends 'dashboard/base.html' %}
-
-{% block title %}
-مدرسه فصلی آبفای مشهد
-{% endblock %}
-
-{% block content %}
+{% extends 'dashboard/base.html' %} {% block title %} مدرسه فصلی آبفای مشهد {%
+endblock %} {% block content %}
 <!-- ======================================================================= -->
 <!-- Container -->
 <!-- ======================================================================= -->
 <div class="container-xxl flex-grow-1 container-p-y">
-    <div class="row">
-        <div class="col-lg-6">
-            <div id="carouselExample" class="carousel slide my-2" data-bs-ride="carousel">
-                <!-- <div class="carousel-indicators">
+  <div class="row">
+    <div class="col-lg-6" id="poster">
+      <div
+        id="carouselExample"
+        class="carousel slide my-2"
+        data-bs-ride="carousel"
+      >
+        <!-- <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
                         aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"
@@ -20,200 +19,350 @@
                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
                 </div> -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="../../assets/img/elements/Poster.jpg" alt="First slide" />
-                        <!-- <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              class="d-block w-100"
+              src="../../assets/img/elements/Poster.jpg"
+              alt="First slide"
+            />
+            <!-- <div class="carousel-caption d-none d-md-block">
                             <h3>First slide</h3>
                             <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
                         </div> -->
-                    </div>
-                </div>
-
-            </div>
+          </div>
         </div>
-        <div class="col-lg-6">
-            <div class="bs-stepper wizard-numbered my-2">
-                <!-- Error Form -->
-                {% if form.is_submitted() and form.errors|count > 0 %}
-                <div class="alert-danger p-3" role="alert">
-                    {{ form.errors|count }} خطا رخ داده است:
-                    <ul>
-                        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-                            {% for error in field_errors %}
-                                <li>{{ form[field_name].label }}: {{ error }}</li>
-                            {% endfor %}
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}    
-                <!-- / Error Form -->
-                <h4 class="text-primary fw-medium text-center pt-3">فرم ثبت نام</h4>
-                <div class="bs-stepper-header">
-                    <div class="step" data-target="#personal">
-                        <button type="button" class="step-trigger">
-                            <span class="bs-stepper-circle">1</span>
-                            <span class="bs-stepper-label">
-                                <span class="bs-stepper-title">اطلاعات فردی</span>
-                                <span class="bs-stepper-subtitle">ثبت مشخصات فرد</span>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="line"></div>
-                    <div class="step" data-target="#general">
-                        <button type="button" class="step-trigger">
-                            <span class="bs-stepper-circle">2</span>
-                            <span class="bs-stepper-label">
-                                <span class="bs-stepper-title">اطلاعات عمومی</span>
-                                <span class="bs-stepper-subtitle">ثبت مشخصات عمومی</span>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="line"></div>
-                    <div class="step" data-target="#university">
-                        <button type="button" class="step-trigger">
-                            <span class="bs-stepper-circle">3</span>
-                            <span class="bs-stepper-label">
-                                <span class="bs-stepper-title">اطلاعات دانشگاهی</span>
-                                <span class="bs-stepper-subtitle">ثبت مشخصات دانشگاه</span>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="line"></div>
-                </div>
-                <div class="bs-stepper-content">
-                    <form action="" method="POST" novalidate enctype="multipart/form-data">
-                        {{ form.csrf_token }}
-                        <!-- Account Details -->
-                        <div id="personal" class="content">
-                            <div class="content-header mb-3">
-                                <small>اطلاعات خود را وارد کنید</small>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.first_name.label(class="form-label") }}
-                                    {{ form.first_name(class="form-control") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.last_name.label(class="form-label") }}
-                                    {{ form.last_name(class="form-control") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.national_id.label(class="form-label") }}
-                                    {{ form.national_id(class="form-control") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.birthday.label(class="form-label") }}
-                                    {{ form.birthday(class="form-control") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.phone_number.label(class="form-label") }}
-                                    {{ form.phone_number(class="form-control") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.email.label(class="form-label") }}
-                                    {{ form.email(class="form-control") }}
-                                </div>
-
-                                <div class="col-12 d-flex justify-content-between">
-                                    <a class="btn btn-label-secondary btn-prev disabled" style="color: white;">
-                                        <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
-                                        <span class="d-sm-inline-block d-none">قبلی</span>
-                                    </a>
-                                    <a class="btn btn-primary btn-next" style="color: white;">
-                                        <span class="d-sm-inline-block d-none" >بعدی</span>
-                                        <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="general" class="content">
-                            <div class="content-header mb-3">
-                                <small>اطلاعات خود را وارد کنید</small>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.accommodation.label(class="form-label") }}
-                                    {{ form.accommodation(class="select2") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.english.label(class="form-label") }}
-                                    {{ form.english(class="select2") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.programing.label(class="form-label") }}
-                                    {{ form.programing(class="select2") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.programing_language.label(class="form-label") }}
-                                    {{ form.programing_language(class="select2", multiple="multiple") }}
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                    {{ form.resume.label(class="form-label") }}
-                                    {{ form.resume(class="form-control") }}
-                                    <a class="ps-2 pt-2" href="{{ url_for('dashboard.download_resume_template') }}" download>
-                                        دانلود نمونه رزومه
-                                    </a>
-                                </div>
-        
-                                <div class="col-12 d-flex justify-content-between">
-                                    <a class="btn btn-primary btn-prev" style="color: white;">
-                                        <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
-                                        <span class="d-sm-inline-block d-none">قبلی</span>
-                                    </a>
-                                    <a class="btn btn-primary btn-next" style="color: white;">
-                                        <span class="d-sm-inline-block d-none" >بعدی</span>
-                                        <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Personal Info -->
-                        <div id="university" class="content">
-                            <div class="content-header mb-3">
-                                <small>اطلاعات خود را وارد کنید</small>
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.university.label(class="form-label") }}
-                                    {{ form.university(class="select2") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.educational_stage.label(class="form-label") }}
-                                    {{ form.educational_stage(class="select2") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.academic_discipline.label(class="form-label") }}
-                                    {{ form.academic_discipline(class="select2") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.score.label(class="form-label") }}
-                                    {{ form.score(class="form-control") }}
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    {{ form.student_identification_number.label(class="form-label") }}
-                                    {{ form.student_identification_number(class="form-control") }}
-                                </div>
-                                
-                                <input type="hidden" name="form_id" value="register">
-                                <div class="col-12 d-flex justify-content-between">
-                                    <a class="btn btn-primary btn-prev" style="color: white;">
-                                        <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
-                                        <span class="d-sm-inline-block d-none">قبلی</span>
-                                    </a>
-                                    <button type="submit" class="btn btn-success btn-submit">
-                                        ثبت نام
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="col-lg-6" >
+      <div class="bs-stepper wizard-numbered my-2" id="register">
+        <!-- Error Form -->
+        {% if form.is_submitted() and form.errors|count > 0 %}
+        <div class="alert-danger p-3" role="alert">
+          {{ form.errors|count }} خطا رخ داده است:
+          <ul>
+            {% for field_name, field_errors in form.errors|dictsort if
+            field_errors %} {% for error in field_errors %}
+            <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %} {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+        <!-- / Error Form -->
+        <h4 class="text-primary fw-medium text-center pt-3">فرم ثبت نام</h4>
+        <div class="bs-stepper-header">
+          <div class="step" data-target="#personal">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-circle">1</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">اطلاعات فردی</span>
+                <span class="bs-stepper-subtitle">ثبت مشخصات فرد</span>
+              </span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step" data-target="#general">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-circle">2</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">اطلاعات عمومی</span>
+                <span class="bs-stepper-subtitle">ثبت مشخصات عمومی</span>
+              </span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step" data-target="#university">
+            <button type="button" class="step-trigger">
+              <span class="bs-stepper-circle">3</span>
+              <span class="bs-stepper-label">
+                <span class="bs-stepper-title">اطلاعات دانشگاهی</span>
+                <span class="bs-stepper-subtitle">ثبت مشخصات دانشگاه</span>
+              </span>
+            </button>
+          </div>
+          <div class="line"></div>
+        </div>
+        <div class="bs-stepper-content">
+          <form
+            action=""
+            method="POST"
+            novalidate
+            enctype="multipart/form-data"
+          >
+            {{ form.csrf_token }}
+            <!-- Account Details -->
+            <div id="personal" class="content">
+              <div class="content-header mb-3">
+                <small>اطلاعات خود را وارد کنید</small>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6 col-sm-12">
+                  {{ form.first_name.label(class="form-label") }} {{
+                  form.first_name(class="form-control") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.last_name.label(class="form-label") }} {{
+                  form.last_name(class="form-control") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.national_id.label(class="form-label") }} {{
+                  form.national_id(class="form-control") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.birthday.label(class="form-label") }} {{
+                  form.birthday(class="form-control") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.phone_number.label(class="form-label") }} {{
+                  form.phone_number(class="form-control") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.email.label(class="form-label") }} {{
+                  form.email(class="form-control") }}
+                </div>
+
+                <div class="col-12 d-flex justify-content-between">
+                  <a
+                    class="btn btn-label-secondary btn-prev disabled"
+                    style="color: white"
+                  >
+                    <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                    <span class="d-sm-inline-block d-none">قبلی</span>
+                  </a>
+                  <a class="btn btn-primary btn-next" style="color: white">
+                    <span class="d-sm-inline-block d-none">بعدی</span>
+                    <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div id="general" class="content">
+              <div class="content-header mb-3">
+                <small>اطلاعات خود را وارد کنید</small>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6 col-sm-12">
+                  {{ form.accommodation.label(class="form-label") }} {{
+                  form.accommodation(class="select2") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.english.label(class="form-label") }} {{
+                  form.english(class="select2") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.programing.label(class="form-label") }} {{
+                  form.programing(class="select2") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.programing_language.label(class="form-label") }} {{
+                  form.programing_language(class="select2", multiple="multiple")
+                  }}
+                </div>
+                <div class="col-md-12 col-sm-12">
+                  {{ form.resume.label(class="form-label") }} {{
+                  form.resume(class="form-control") }}
+                  <a
+                    class="ps-2 pt-2"
+                    href="{{ url_for('dashboard.download_resume_template') }}"
+                    download
+                  >
+                    دانلود نمونه رزومه
+                  </a>
+                </div>
+
+                <div class="col-12 d-flex justify-content-between">
+                  <a class="btn btn-primary btn-prev" style="color: white">
+                    <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                    <span class="d-sm-inline-block d-none">قبلی</span>
+                  </a>
+                  <a class="btn btn-primary btn-next" style="color: white">
+                    <span class="d-sm-inline-block d-none">بعدی</span>
+                    <i class="bx bx-chevron-right bx-sm me-sm-n2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Personal Info -->
+            <div id="university" class="content">
+              <div class="content-header mb-3">
+                <small>اطلاعات خود را وارد کنید</small>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6 col-sm-12">
+                  {{ form.university.label(class="form-label") }} {{
+                  form.university(class="select2") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.educational_stage.label(class="form-label") }} {{
+                  form.educational_stage(class="select2") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.academic_discipline.label(class="form-label") }} {{
+                  form.academic_discipline(class="select2") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{ form.score.label(class="form-label") }} {{
+                  form.score(class="form-control") }}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  {{
+                  form.student_identification_number.label(class="form-label")
+                  }} {{ form.student_identification_number(class="form-control")
+                  }}
+                </div>
+
+                <input type="hidden" name="form_id" value="register" />
+                <div class="col-12 d-flex justify-content-between">
+                  <a class="btn btn-primary btn-prev" style="color: white">
+                    <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                    <span class="d-sm-inline-block d-none">قبلی</span>
+                  </a>
+                  <button type="submit" class="btn btn-success btn-submit">
+                    ثبت نام
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="accordion mt-5 accordion-header-primary" id="qa">
+        <h5>شیوه نامه حضور دانشجویان<h5>
+        <div class="accordion-item card">
+          <h2 class="accordion-header">
+            <button
+              type="button"
+              class="accordion-button collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#qa-1"
+              aria-expanded="false"
+            >
+              هزینه ها
+            </button>
+          </h2>
+
+          <div
+            id="qa-1"
+            class="accordion-collapse collapse"
+            data-bs-parent="#qa"
+          >
+            <div class="accordion-body">
+                <ul>
+                    <li>
+                        <small class="iraniansans2">
+                            هزینه های حمل و نقل از دانشگاه مبداء (دانشگاه محل تحصیل) تا مشهد و بلعکس، به عهده دانشگاه مبداء یا دانشجو خواهد بود.
+                        </small>
+                    </li>
+                    <li class="pt-2">
+                        <small class="iraniansans2">
+                            کلیه هزینه های مربوط به حضور دانشجویان در دوره شامل (حمل و نقل درون شهری، اسکان و وعده های غذایی) بر عهده شرکت آب و فاضلاب مشهد می باشد.
+                        </small>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item card">
+          <h2 class="accordion-header">
+            <button
+              type="button"
+              class="accordion-button collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#qa-2"
+              aria-expanded="false"
+            >
+              بیمه و مسئولیت
+            </button>
+          </h2>
+          <div
+            id="qa-2"
+            class="accordion-collapse collapse"
+            data-bs-parent="#qa"
+          >
+          <div class="accordion-body">
+            <ul>
+                <li>
+                    <small class="iraniansans2">
+                        بر اساس تصمیمات ابلاغ شده از سوی شرکت مهندسی آب و فاضلاب کشور، بیمه و مسئولیت سفر از شهر مبداء تا مشهد و بالعکس، بر عهده دانشگاه مبداء (دانشگاه محل تحصیل) می باشد.
+                    </small>
+                </li>
+                <li class="pt-2">
+                    <small class="iraniansans2">
+                        برای مدت زمان حضور دانشجویان در طول مدت دوره (شهر مشهد)، بیمه حوادث از سوی برگزار کنندگان در نظر گرفته شده است.
+                    </small>
+                </li>
+            </ul>
+        </div>
+          </div>
+        </div>
+
+        <div class="card accordion-item">
+          <h2 class="accordion-header">
+            <button
+              type="button"
+              class="accordion-button collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#qa-3"
+              aria-expanded="false"
+            >
+              دانشگاه های مجاز
+            </button>
+          </h2>
+          <div
+            id="qa-3"
+            class="accordion-collapse collapse"
+            data-bs-parent="#qa"
+          >
+          <div class="accordion-body">
+            <ul>
+                <li>
+                    <small class="iraniansans2">
+                        نظر به نامه شماره 16357/400/1403 مورخ 1403/07/09 شرکت مهندسی آب و فاضلاب کشور و انتخاب کار گروه منطقه ای و برگزاری نشست اولیه مورخ 1403/09/11 در محل شرکت آب و فاضلاب مشهد، صرفا دانشجویان استان های محور و معین شامل: استان های خراسان شمالی، خراسان رضوی، خراسان جنوبی، گلستان و مازندران مجاز به شرکت در این دوره می باشند که حسب استعلام صورت گرفته از شرکت های آبفای معین، دانشگاه های بجنورد، فردوسی مشهد، خیام، سجاد، آزاد اسلامی مشهد، مجتمع آموزش عالی گناباد، بیرجند، صنعتی بیرجند، علوم کشاورزی و منابع طبیعی گرگان، مازندران و علوم کشاورزی و منابع طبیعی ساری جهت معرفی دانشجو انتخاب و تعیین گردیده اند.
+                    </small>
+                </li>
+            </ul>
+        </div>
+          </div>
+        </div>
+        <div class="card accordion-item">
+          <h2 class="accordion-header">
+            <button
+              type="button"
+              class="accordion-button collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#qa-4"
+              aria-expanded="false"
+            >
+              تاییدیه
+            </button>
+          </h2>
+          <div
+            id="qa-4"
+            class="accordion-collapse collapse"
+            data-bs-parent="#qa"
+          >
+          <div class="accordion-body">
+            <ul>
+                <li>
+                    <small class="iraniansans2">
+                        پس از بررسی رزومه ها و تایید دانشجویان، واحد ارتباط با صنعت دانشگاه بایستی دانشجویان دانشگاه خود را به برگزار کنندگان مدرسه فصلی (پژوهشکده آب و محیط زیست دانشگاه فردوسی مشهد) به صورت رسمی معرفی شوند.
+                    </small>
+                </li>
+                <li class="pt-2">
+                    <small class="iraniansans2">
+                        با توجه به بازدیدهای میدانی برنامه ریزی شده از تاسیسات شرکت آب و فاضلاب مشهد، استعلام و تایید لیست دانشجویان از سوی حراست شرکت آب و فاضلاب مشهد ضروری بوده و لذا معرفی دانشجویان از سوی مراکز ارتباط با صنعت دانشگاه ها بایستی بصورت رسمی صورت پذیرد.
+                    </small>
+                </li>
+            </ul>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ======================================================================= -->
+  <!-- /Container -->
+  <!-- ======================================================================= -->
+  {% endblock %}
 </div>
-<!-- ======================================================================= -->
-<!-- /Container -->
-<!-- ======================================================================= -->
-{% endblock %}

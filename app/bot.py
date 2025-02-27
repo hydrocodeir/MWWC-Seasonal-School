@@ -1,12 +1,18 @@
+import os
 import telebot
 from flask_sqlalchemy import SQLAlchemy
 import schedule
 import time
 from threading import Thread
+from dotenv import load_dotenv
 
-TELEGRAM_TOKEN = '8043272038:AAFbx_iyOmTSco0U_5pG7a-51NjZ7uLWcaU'
+
+load_dotenv()
+
+
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
-CHAT_ID = -4638690648
+CHAT_ID = os.getenv('CHAT_ID')
 
 
 def init_bot(app):
