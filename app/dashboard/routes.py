@@ -140,10 +140,12 @@ def home():
                 file_path=resume_path
             )
             return redirect(location=url_for(endpoint='dashboard.home'))
-        
+    
+    count = Register.query.count()  
     return render_template(
         template_name_or_list='dashboard/home.html',
-        form=form
+        form=form,
+        count=count
     )
 
 
