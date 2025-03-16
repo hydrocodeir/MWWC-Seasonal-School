@@ -4,13 +4,26 @@ endblock %} {% block content %}
 <!-- Container -->
 <!-- ======================================================================= -->
 <div class="container-xxl flex-grow-1 container-p-y">
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="welcomeModalLabel">اطلاعیه</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>با توجه به استقبال دانشجویان گرامی، مهلت ثبت نام تا 18 فروردین ماه 1404 تمدید شد!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-lg-6" id="poster">
-      <div
-        id="carouselExample"
-        class="carousel slide my-2"
-        data-bs-ride="carousel"
-      >
+      <div id="carouselExample" class="carousel slide my-2" data-bs-ride="carousel">
         <!-- <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
                         aria-current="true" aria-label="Slide 1"></button>
@@ -21,11 +34,7 @@ endblock %} {% block content %}
                 </div> -->
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img
-              class="d-block w-100"
-              src="../../assets/img/elements/Poster.jpg"
-              alt="First slide"
-            />
+            <img class="d-block w-100" src="../../assets/img/elements/Poster.jpg" alt="First slide" />
             <!-- <div class="carousel-caption d-none d-md-block">
                             <h3>First slide</h3>
                             <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
@@ -34,7 +43,7 @@ endblock %} {% block content %}
         </div>
       </div>
     </div>
-    <div class="col-lg-6" >
+    <div class="col-lg-6">
       <div class="bs-stepper wizard-numbered my-2" id="register">
         <!-- Error Form -->
         {% if form.is_submitted() and form.errors|count > 0 %}
@@ -50,7 +59,8 @@ endblock %} {% block content %}
         {% endif %}
         <!-- / Error Form -->
         <h4 class="text-primary fw-medium text-center pt-3">فرم ثبت نام</h4>
-        <div class="p-0 m-0 text-center"><span class="badge text-bg-secondary">تا کنون {{count}} نفر ثبت نام کرده‌اند!</span></div>
+        <div class="p-0 m-0 text-center"><span class="badge text-bg-secondary">تا کنون {{count}} نفر ثبت نام
+            کرده‌اند!</span></div>
         <div class="bs-stepper-header">
           <div class="step" data-target="#personal">
             <button type="button" class="step-trigger">
@@ -84,12 +94,7 @@ endblock %} {% block content %}
           <div class="line"></div>
         </div>
         <div class="bs-stepper-content">
-          <form
-            action=""
-            method="POST"
-            novalidate
-            enctype="multipart/form-data"
-          >
+          <form action="" method="POST" novalidate enctype="multipart/form-data">
             {{ form.csrf_token }}
             <!-- Account Details -->
             <div id="personal" class="content">
@@ -123,10 +128,7 @@ endblock %} {% block content %}
                 </div>
 
                 <div class="col-12 d-flex justify-content-between">
-                  <a
-                    class="btn btn-label-secondary btn-prev disabled"
-                    style="color: white"
-                  >
+                  <a class="btn btn-label-secondary btn-prev disabled" style="color: white">
                     <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
                     <span class="d-sm-inline-block d-none">قبلی</span>
                   </a>
@@ -162,11 +164,7 @@ endblock %} {% block content %}
                 <div class="col-md-12 col-sm-12">
                   {{ form.resume.label(class="form-label") }} {{
                   form.resume(class="form-control") }}
-                  <a
-                    class="ps-2 pt-2"
-                    href="{{ url_for('dashboard.download_resume_template') }}"
-                    download
-                  >
+                  <a class="ps-2 pt-2" href="{{ url_for('dashboard.download_resume_template') }}" download>
                     دانلود نمونه رزومه
                   </a>
                 </div>
@@ -229,136 +227,114 @@ endblock %} {% block content %}
       </div>
       <div class="accordion mt-5 accordion-header-primary" id="qa">
         <h5>شیوه نامه حضور دانشجویان<h5>
-        <div class="accordion-item card">
-          <h2 class="accordion-header">
-            <button
-              type="button"
-              class="accordion-button collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#qa-1"
-              aria-expanded="false"
-            >
-              هزینه ها
-            </button>
-          </h2>
+            <div class="accordion-item card">
+              <h2 class="accordion-header">
+                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                  data-bs-target="#qa-1" aria-expanded="false">
+                  هزینه ها
+                </button>
+              </h2>
 
-          <div
-            id="qa-1"
-            class="accordion-collapse collapse"
-            data-bs-parent="#qa"
-          >
-            <div class="accordion-body">
-                <ul class="iraniansans2">
+              <div id="qa-1" class="accordion-collapse collapse" data-bs-parent="#qa">
+                <div class="accordion-body">
+                  <ul class="iraniansans2">
                     <li>
-                        <small>
-                            هزینه های حمل و نقل از دانشگاه مبداء (دانشگاه محل تحصیل) تا مشهد و بلعکس، به عهده دانشگاه مبداء یا دانشجو خواهد بود.
-                        </small>
+                      <small>
+                        هزینه های حمل و نقل از دانشگاه مبداء (دانشگاه محل تحصیل) تا مشهد و بلعکس، به عهده دانشگاه مبداء
+                        یا دانشجو خواهد بود.
+                      </small>
                     </li>
                     <li class="pt-2">
-                        <small>
-                            کلیه هزینه های مربوط به حضور دانشجویان در دوره شامل (حمل و نقل درون شهری، اسکان و وعده های غذایی) بر عهده شرکت آب و فاضلاب مشهد می باشد.
-                        </small>
+                      <small>
+                        کلیه هزینه های مربوط به حضور دانشجویان در دوره شامل (حمل و نقل درون شهری، اسکان و وعده های
+                        غذایی) بر عهده شرکت آب و فاضلاب مشهد می باشد.
+                      </small>
                     </li>
-                </ul>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="accordion-item card">
-          <h2 class="accordion-header">
-            <button
-              type="button"
-              class="accordion-button collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#qa-2"
-              aria-expanded="false"
-            >
-              بیمه و مسئولیت
-            </button>
-          </h2>
-          <div
-            id="qa-2"
-            class="accordion-collapse collapse"
-            data-bs-parent="#qa"
-          >
-          <div class="accordion-body">
-            <ul class="iraniansans2">
-                <li>
-                    <small>
-                        بر اساس تصمیمات ابلاغ شده از سوی شرکت مهندسی آب و فاضلاب کشور، بیمه و مسئولیت سفر از شهر مبداء تا مشهد و بالعکس، بر عهده دانشگاه مبداء (دانشگاه محل تحصیل) می باشد.
-                    </small>
-                </li>
-                <li class="pt-2">
-                    <small>
-                        برای مدت زمان حضور دانشجویان در طول مدت دوره (شهر مشهد)، بیمه حوادث از سوی برگزار کنندگان در نظر گرفته شده است.
-                    </small>
-                </li>
-            </ul>
-        </div>
-          </div>
-        </div>
+            <div class="accordion-item card">
+              <h2 class="accordion-header">
+                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                  data-bs-target="#qa-2" aria-expanded="false">
+                  بیمه و مسئولیت
+                </button>
+              </h2>
+              <div id="qa-2" class="accordion-collapse collapse" data-bs-parent="#qa">
+                <div class="accordion-body">
+                  <ul class="iraniansans2">
+                    <li>
+                      <small>
+                        بر اساس تصمیمات ابلاغ شده از سوی شرکت مهندسی آب و فاضلاب کشور، بیمه و مسئولیت سفر از شهر مبداء
+                        تا مشهد و بالعکس، بر عهده دانشگاه مبداء (دانشگاه محل تحصیل) می باشد.
+                      </small>
+                    </li>
+                    <li class="pt-2">
+                      <small>
+                        برای مدت زمان حضور دانشجویان در طول مدت دوره (شهر مشهد)، بیمه حوادث از سوی برگزار کنندگان در نظر
+                        گرفته شده است.
+                      </small>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-        <div class="card accordion-item">
-          <h2 class="accordion-header">
-            <button
-              type="button"
-              class="accordion-button collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#qa-3"
-              aria-expanded="false"
-            >
-              دانشگاه های مجاز
-            </button>
-          </h2>
-          <div
-            id="qa-3"
-            class="accordion-collapse collapse"
-            data-bs-parent="#qa"
-          >
-          <div class="accordion-body">
-            <ul class="iraniansans2">
-                <li>
-                    <small>
-                        نظر به نامه شماره 16357/400/1403 مورخ 1403/07/09 شرکت مهندسی آب و فاضلاب کشور و انتخاب کار گروه منطقه ای و برگزاری نشست اولیه مورخ 1403/09/11 در محل شرکت آب و فاضلاب مشهد، صرفا دانشجویان استان های محور و معین شامل: استان های خراسان شمالی، خراسان رضوی، خراسان جنوبی، گلستان و مازندران مجاز به شرکت در این دوره می باشند که حسب استعلام صورت گرفته از شرکت های آبفای معین، دانشگاه های بجنورد، فردوسی مشهد، خیام، سجاد، آزاد اسلامی مشهد، مجتمع آموزش عالی گناباد، بیرجند، صنعتی بیرجند، علوم کشاورزی و منابع طبیعی گرگان، مازندران و علوم کشاورزی و منابع طبیعی ساری جهت معرفی دانشجو انتخاب و تعیین گردیده اند.
-                    </small>
-                </li>
-            </ul>
-        </div>
-          </div>
-        </div>
-        <div class="card accordion-item">
-          <h2 class="accordion-header">
-            <button
-              type="button"
-              class="accordion-button collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#qa-4"
-              aria-expanded="false"
-            >
-              تاییدیه
-            </button>
-          </h2>
-          <div
-            id="qa-4"
-            class="accordion-collapse collapse"
-            data-bs-parent="#qa"
-          >
-          <div class="accordion-body">
-            <ul class="iraniansans2">
-                <li>
-                    <small>
-                        پس از بررسی رزومه ها و تایید دانشجویان، واحد ارتباط با صنعت دانشگاه بایستی دانشجویان دانشگاه خود را به برگزار کنندگان مدرسه فصلی (پژوهشکده آب و محیط زیست دانشگاه فردوسی مشهد) به صورت رسمی معرفی شوند.
-                    </small>
-                </li>
-                <li class="pt-2">
-                    <small>
-                        با توجه به بازدیدهای میدانی برنامه ریزی شده از تاسیسات شرکت آب و فاضلاب مشهد، استعلام و تایید لیست دانشجویان از سوی حراست شرکت آب و فاضلاب مشهد ضروری بوده و لذا معرفی دانشجویان از سوی مراکز ارتباط با صنعت دانشگاه ها بایستی بصورت رسمی صورت پذیرد.
-                    </small>
-                </li>
-            </ul>
-        </div>
-          </div>
-        </div>
+            <div class="card accordion-item">
+              <h2 class="accordion-header">
+                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                  data-bs-target="#qa-3" aria-expanded="false">
+                  دانشگاه های مجاز
+                </button>
+              </h2>
+              <div id="qa-3" class="accordion-collapse collapse" data-bs-parent="#qa">
+                <div class="accordion-body">
+                  <ul class="iraniansans2">
+                    <li>
+                      <small>
+                        نظر به نامه شماره 16357/400/1403 مورخ 1403/07/09 شرکت مهندسی آب و فاضلاب کشور و انتخاب کار گروه
+                        منطقه ای و برگزاری نشست اولیه مورخ 1403/09/11 در محل شرکت آب و فاضلاب مشهد، صرفا دانشجویان استان
+                        های محور و معین شامل: استان های خراسان شمالی، خراسان رضوی، خراسان جنوبی، گلستان و مازندران مجاز
+                        به شرکت در این دوره می باشند که حسب استعلام صورت گرفته از شرکت های آبفای معین، دانشگاه های
+                        بجنورد، فردوسی مشهد، خیام، سجاد، آزاد اسلامی مشهد، مجتمع آموزش عالی گناباد، بیرجند، صنعتی
+                        بیرجند، علوم کشاورزی و منابع طبیعی گرگان، مازندران و علوم کشاورزی و منابع طبیعی ساری جهت معرفی
+                        دانشجو انتخاب و تعیین گردیده اند.
+                      </small>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card accordion-item">
+              <h2 class="accordion-header">
+                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                  data-bs-target="#qa-4" aria-expanded="false">
+                  تاییدیه
+                </button>
+              </h2>
+              <div id="qa-4" class="accordion-collapse collapse" data-bs-parent="#qa">
+                <div class="accordion-body">
+                  <ul class="iraniansans2">
+                    <li>
+                      <small>
+                        پس از بررسی رزومه ها و تایید دانشجویان، واحد ارتباط با صنعت دانشگاه بایستی دانشجویان دانشگاه خود
+                        را به برگزار کنندگان مدرسه فصلی (پژوهشکده آب و محیط زیست دانشگاه فردوسی مشهد) به صورت رسمی معرفی
+                        شوند.
+                      </small>
+                    </li>
+                    <li class="pt-2">
+                      <small>
+                        با توجه به بازدیدهای میدانی برنامه ریزی شده از تاسیسات شرکت آب و فاضلاب مشهد، استعلام و تایید
+                        لیست دانشجویان از سوی حراست شرکت آب و فاضلاب مشهد ضروری بوده و لذا معرفی دانشجویان از سوی مراکز
+                        ارتباط با صنعت دانشگاه ها بایستی بصورت رسمی صورت پذیرد.
+                      </small>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
       </div>
     </div>
   </div>
