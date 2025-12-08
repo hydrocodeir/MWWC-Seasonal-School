@@ -11,15 +11,16 @@ app = create_app()
 
 if __name__ == '__main__':
     
-    threading.Thread(target=start_bot).start()
+    # threading.Thread(target=start_bot).start()
     
-    server = Server(app.wsgi_app)
-    server.serve(
-        host = "127.0.0.1",
-        port=5505
-    )
-    
-    # app.run(
-    #     host="127.0.0.1",
+    # server = Server(app.wsgi_app)
+    # server.serve(
+    #     host = "127.0.0.1",
     #     port=5505
     # )
+    
+    app.run(
+        host="127.0.0.1",
+        port=5505,
+        debug=True
+    )
